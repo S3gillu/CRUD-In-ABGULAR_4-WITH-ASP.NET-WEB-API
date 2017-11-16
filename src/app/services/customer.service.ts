@@ -18,11 +18,10 @@ export class CustomerService {
   getCustomers() {
 
     let headers = new Headers({ 'Content-Type': 'application/json' });
-    headers.append('Content-Type', 'application/json');
-    headers.append('Accept', 'application/json');
-    headers.append('Access-Control-Allow-Origin', 'http://localhost:6590');
     let options = new RequestOptions({ headers: headers });
-
+    // headers.append('Content-Type', 'application/json');
+    // headers.append('Accept', 'application/json');
+    // headers.append('Access-Control-Allow-Origin', 'http://localhost:6590');
 
     return this._http.get(this.baseUrl, options)
       .map((response: Response) => response.json())
@@ -33,7 +32,6 @@ export class CustomerService {
 
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
-
 
     return this._http.get(this.baseUrl3 + id)
       .map((response: Response) => response.json())
