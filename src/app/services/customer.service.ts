@@ -7,12 +7,8 @@ import 'rxjs/add/observable/throw';
 
 @Injectable()
 export class CustomerService {
-  baseUrl: string = 'http://localhost:53811/api/Customer/GetAllCustomer';
-  baseUrl1: string = 'http://localhost:53811/api/Customer/AddCustomer';
-  baseUrl2: string = 'http://localhost:53811/api/Customer/DeleteCustomerById/';
-  baseUrl3: string = 'http://localhost:53811/api/Customer/GetCustomerById/';
-  
-
+  baseUrl: string = 'http://localhost:53811/api/Customer/';
+ 
   constructor(private _http: Http) { 
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
@@ -22,29 +18,28 @@ export class CustomerService {
     // headers.append('Content-Type', 'application/json');
     // headers.append('Accept', 'application/json');
     // headers.append('Access-Control-Allow-Origin', 'http://localhost:6590');
-    return this._http.get(this.baseUrl)
+    return this._http.get(this.baseUrl+'GetAllCustomer')
       .map((response: Response) => response.json())
       .catch(this._errorHandler);
   }
 
   getCustomerById(id) {
-    return this._http.get(this.baseUrl3 + id)
+    return this._http.get(this.baseUrl +'GetCustomerById/'+ id)
       .map((response: Response) => response.json())
       .catch(this._errorHandler)
   }
 
   saveCustomer(customer) {
-    return this._http.post(this.baseUrl1, customer)
+    return this._http.post(this.baseUrl+'AddCustomer',customer)
       .map((response: Response) => response.json())
       .catch(this._errorHandler)
   }
 
   deleteCustomer(id) {
   debugger;
-    return this._http.delete(this.baseUrl2 + id)
+    return this._http.delete(this.baseUrl+'DeleteCustomerById/' + id)
       .map((response: Response) => response.json())
-      .catch(this._errorHandler)
-     
+      .catch(this._errorHandler)    
   }
 
   _errorHandler(error: Response) {
