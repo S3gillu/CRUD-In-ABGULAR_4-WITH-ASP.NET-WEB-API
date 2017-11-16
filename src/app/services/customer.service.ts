@@ -13,36 +13,27 @@ export class CustomerService {
   baseUrl3: string = 'http://localhost:53811/api/Customer/GetCustomerById/';
   
 
-  constructor(private _http: Http) { }
-
-  getCustomers() {
-
+  constructor(private _http: Http) { 
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
+  }
+
+  getCustomers() {
     // headers.append('Content-Type', 'application/json');
     // headers.append('Accept', 'application/json');
     // headers.append('Access-Control-Allow-Origin', 'http://localhost:6590');
-
-    return this._http.get(this.baseUrl, options)
+    return this._http.get(this.baseUrl)
       .map((response: Response) => response.json())
       .catch(this._errorHandler);
   }
 
   getCustomerById(id) {
-
-    let headers = new Headers({ 'Content-Type': 'application/json' });
-    let options = new RequestOptions({ headers: headers });
-
     return this._http.get(this.baseUrl3 + id)
       .map((response: Response) => response.json())
       .catch(this._errorHandler)
   }
 
   saveCustomer(customer) {
-
-    let headers = new Headers({ 'Content-Type': 'application/json' });
-    let options = new RequestOptions({ headers: headers });
-
     return this._http.post(this.baseUrl1, customer)
       .map((response: Response) => response.json())
       .catch(this._errorHandler)
@@ -50,10 +41,6 @@ export class CustomerService {
 
   deleteCustomer(id) {
   debugger;
-  
-    let headers = new Headers({ 'Content-Type': 'application/json' });
-    let options = new RequestOptions({ headers: headers });
-
     return this._http.delete(this.baseUrl2 + id)
       .map((response: Response) => response.json())
       .catch(this._errorHandler)
